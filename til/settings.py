@@ -145,7 +145,11 @@ AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
     "allauth.account.auth_backends.AuthenticationBackend"
 )
-
+STATICFILES_DIRS = [
+    os.path.join(PROJECT_DIR, "frontend/"),
+]
+STATIC_ROOT= os.path.join(BASE_DIR, "static")
+STATIC_URL = "/static/"
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
