@@ -1,9 +1,12 @@
-from django.views.generic import TemplateView, DetailView
-from django.views.generic.edit import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
+from django.views.generic import DetailView, TemplateView
+from django.views.generic.edit import CreateView
+
 from followers.models import Follower
+
 from .models import Post
+
 
 class HomePage(TemplateView):
     http_method_names = ["get"]
@@ -46,10 +49,13 @@ class CreateNewPost(LoginRequiredMixin, CreateView):
         obj.save()
         return super().form_valid(form)
     def post(self, request, *args, **kwargs):
-        post= post.objects.create(
-            author=request.user,
-            text= request.post.get("text"),
-            )
+        # TODO: There is a bug here when you go to /new/ to create a post.
+        # TODO: You must figure out how to determine if this is an Ajax request (or not an ajax request).
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            post= post.objects.create(
+                author=request.user,
+                text= request.post.get("text"),
+                )
         return render(
             request, 
             "includes/post.html", 

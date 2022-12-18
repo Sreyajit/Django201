@@ -51,6 +51,7 @@
     {% endblock %}
   </div>
 {% if request.user.is_authenticated %}
+{# TODO: Move the modal into an included file in order to keep base.html clean and organized #}
   <!-- component -->
   <div class="flex items-center justify-center fixed left-0 bottom-0 w-full h-full bg-gray-800 bg-opacity-75 hidden js-modal">
     <div class="bg-white rounded-lg w-1/2">
@@ -64,10 +65,6 @@
         <hr>
         <div class="w-full">
           <textarea class="border-2 border-blue-500 my-4 w-full js-post-text" placeholder="Enter your post" rows="3" maxlength="240" data-post-url="{% url 'feed:new_post' %}"></textarea>
-        </div>
-        <hr>
-        <div class="ml-auto">
-  
         </div>
         <hr>
         <div class="ml-auto">

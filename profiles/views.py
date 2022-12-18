@@ -1,9 +1,12 @@
-from django.contrib.auth.models import User
-from django.views.generic import DetailView, View
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import JsonResponse, HttpResponseBadRequest
+from django.contrib.auth.models import User
+from django.http import HttpResponseBadRequest, JsonResponse
+from django.views.generic import DetailView, View
+
 from feed.models import Post
 from followers.models import Follower
+
+
 class ProfileDetailView(DetailView):
     http_method_names = ["get"]
     template_name = "profiles/detail.html"
